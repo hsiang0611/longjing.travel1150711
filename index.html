@@ -279,26 +279,6 @@
 
   <main id="days"></main>
 
-  <section class="rooms">
-    <h4>住宿房間資訊 ‧ 礁溪 320 山館</h4>
-    <div class="floor">
-      <div class="floor-label">2 樓</div>
-      <div class="room-grid">
-        <div class="room"><div class="room-no">201</div><div class="room-names">詠丞</div></div>
-        <div class="room"><div class="room-no">202</div><div class="room-names">厚任</div></div>
-        <div class="room"><div class="room-no">203</div><div class="room-names">真益</div></div>
-        <div class="room"><div class="room-no">205</div><div class="room-names">義翔</div></div>
-      </div>
-    </div>
-    <div class="floor">
-      <div class="floor-label">3 樓</div>
-      <div class="room-grid">
-        <div class="room"><div class="room-no">301</div><div class="room-names">彥良</div></div>
-        <div class="room"><div class="room-no">302</div><div class="room-names">子墉</div></div>
-      </div>
-    </div>
-  </section>
-
   <section class="legend">
     <h4>圖例</h4>
     <ul id="legend"></ul>
@@ -446,7 +426,7 @@ ITIN.forEach((d,i)=>{
   sec.innerHTML=`<div class="day-head">
       <div class="num">${d.day}</div>
       <div class="info"><div class="label">Day ${d.day}</div><h2>${d.title}</h2><div class="date">${d.date}</div></div>
-    </div>${infoBlock(d.day)}<div class="timeline">${rows}</div>`;
+    </div>${infoBlock(d.day)}<div class="timeline">${rows}</div>${d.day===1?roomsBlock():''}`;
   daysEl.appendChild(sec);
 });
 
@@ -458,6 +438,27 @@ const legendEl=document.getElementById('legend');
 });
 
 /* ---------- weather + traffic UI ---------- */
+function roomsBlock(){
+  return `<section class="rooms">
+    <h4>住宿房間資訊 ‧ 礁溪 320 山館</h4>
+    <div class="floor">
+      <div class="floor-label">2 樓</div>
+      <div class="room-grid">
+        <div class="room"><div class="room-no">201</div><div class="room-names">詠丞</div></div>
+        <div class="room"><div class="room-no">202</div><div class="room-names">厚任</div></div>
+        <div class="room"><div class="room-no">203</div><div class="room-names">真益</div></div>
+        <div class="room"><div class="room-no">205</div><div class="room-names">義翔</div></div>
+      </div>
+    </div>
+    <div class="floor">
+      <div class="floor-label">3 樓</div>
+      <div class="room-grid">
+        <div class="room"><div class="room-no">301</div><div class="room-names">彥良</div></div>
+        <div class="room"><div class="room-no">302</div><div class="room-names">子墉</div></div>
+      </div>
+    </div>
+  </section>`;
+}
 function infoBlock(day){
   const e=EXTRA[day], t=e.traffic;
   return `<div class="info-strip">
