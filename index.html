@@ -137,6 +137,10 @@
   .card h3{font-family:"Noto Serif TC",serif;font-weight:600;font-size:17px;letter-spacing:.02em;margin:2px 0 0;}
   .card .resv{font-size:12px;color:var(--accent);font-weight:500;}
   .card .note{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.02em;}
+  .card-foot{display:flex;justify-content:flex-end;margin-top:10px;}
+  .nav-btn{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:500;color:#fff;background:var(--accent);padding:6px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 10px -5px var(--accent-deep);}
+  .nav-btn svg{width:14px;height:14px;}
+  .nav-btn:active{filter:brightness(.92);}
 
   /* travel pill */
   .travel{align-items:center;}
@@ -260,20 +264,20 @@ const ICON = {
   craft:'<path d="M12 3a9 9 0 1 0 0 18c1 0 1.4-.8 1.4-1.4 0-.5-.3-.8-.3-1.3 0-.7.6-1.2 1.3-1.2H16a4 4 0 0 0 4-4c0-4.4-3.6-8.1-8-8.1z"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="16" cy="11" r="1"/>',
   shopping:'<path d="M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 0 1 6 0v2"/>',
   home:'<path d="M4 11l8-7 8 7M6 10v9h12v-9M10 19v-5h4v5"/>',
-  car:'<path d="M5 13l1.4-4.2A2 2 0 0 1 8.3 7.5h7.4a2 2 0 0 1 1.9 1.3L19 13M4 13h16v4H4zM7.5 17v1.5M16.5 17v1.5"/><circle cx="8" cy="17" r="1.3"/><circle cx="16" cy="17" r="1.3"/>'
+  car:'<path d="M5 13l1.4-4.2A2 2 0 0 1 8.3 7.5h7.4a2 2 0 0 1 1.9 1.3L19 13M4 13h16v4H4zM7.5 17v1.5M16.5 17v1.5"/><circle cx="8" cy="17" r="1.3"/><circle cx="16" cy="17" r="1.3"/>',
+  depart:'<path d="M5 21V4M5 5h11l-2.2 3L16 11H5"/>',
+  nav:'<path d="M3 11l18-8-8 18-2-7-8-3z"/>'
 };
 function svg(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICON[name]||''}</svg>`;}
 
-const TYPE_LABEL = {lodging:'住宿',meal:'用餐',coffee:'下午茶',sight:'景點',craft:'手作活動',shopping:'購物',home:'返程'};
-const TYPE_ICON  = {lodging:'lodging',meal:'meal',coffee:'coffee',sight:'sight',craft:'craft',shopping:'shopping',home:'home'};
+const TYPE_LABEL = {lodging:'住宿',meal:'用餐',coffee:'下午茶',sight:'景點',craft:'手作活動',shopping:'購物',home:'返程',depart:'出發'};
+const TYPE_ICON  = {lodging:'lodging',meal:'meal',coffee:'coffee',sight:'sight',craft:'craft',shopping:'shopping',home:'home',depart:'depart'};
 
 /* ---------- data ---------- */
 const ITIN = [
   {day:1,theme:'coast',title:'北海岸・藝術與海風',date:'07.11 (五)',stops:[
-    {time:'09:00',type:'lodging',name:'承億文旅 淡水吹風',note:'09:00 退房'},
-    {travel:'10 分鐘'},
-    {time:'09:10',type:'sight',name:'滬尾藝文休閒園區',note:'預計停留 1 小時'},
-    {travel:'1 小時'},
+    {time:'07:30',type:'depart',name:'台中出發',note:'集合出發，直奔三芝田中芳園',nonav:true},
+    {travel:'約 3.5 小時'},
     {time:'11:00',type:'meal',name:'田中芳園',resv:'預約 11:00',note:'午餐 ‧ 用餐時間 2 小時'},
     {travel:'10 分鐘'},
     {time:'13:10',type:'sight',name:'朱銘美術館',note:'預計停留 2 小時'},
@@ -314,7 +318,7 @@ const ITIN = [
     {travel:'1 小時 40 分鐘',depart:'18:30 出發'},
     {time:'20:10',type:'meal',name:'新竹藝軒私房料理',note:'晚餐'},
     {travel:'1 小時'},
-    {time:'21:10',type:'home',name:'回台中',note:'行程結束 ‧ 平安回家'}
+    {time:'21:10',type:'home',name:'回台中',note:'行程結束 ‧ 平安回家',nonav:true}
   ]}
 ];
 
@@ -334,8 +338,10 @@ function wmap(c){return WMAP[c]||['🌡️','—'];}
 
 const EXTRA={
   1:{region:{name:'淡水・北海岸',lat:25.20,lon:121.69},climo:{hi:33,lo:27},
-     traffic:{level:'mid',summary:'雪山隧道 南下 ‧ 中度車流',segs:[
-       {road:'國道 5 號 ‧ 雪山隧道',dir:'南下（往宜蘭）',risk:'mid',when:'週五傍晚 18:00–19:00',
+     traffic:{level:'mid',summary:'國道北上 + 雪隧南下 ‧ 中度',segs:[
+       {road:'國道 1 號 / 國道 3 號',dir:'北上（台中 → 三芝）',risk:'mid',when:'週五上午 07:30 出發',
+        tip:'長途北上前往北海岸三芝，車程約 3.5 小時。週五上午接近台北都會區（約 9–10 點）可能遇到通勤車流，建議準時出發以趕上 11:00 田中芳園的訂位。',from:'台中',to:'田中芳園 三芝'},
+       {road:'國道 5 號 ‧ 雪山隧道',dir:'南下（往宜蘭）',risk:'mid',when:'傍晚 18:00–19:00',
         tip:'野柳前往礁溪會經國道3轉國道5走雪隧。週五傍晚往宜蘭車潮漸增、雪隧為主要瓶頸，但傍晚已較午後和緩；出發前先看一下即時路況較保險。',from:'野柳',to:'礁溪'}]}},
   2:{region:{name:'宜蘭・三星',lat:24.66,lon:121.65},climo:{hi:33,lo:26},
      traffic:{level:'low',summary:'宜蘭縣內 ‧ 無國道路段',segs:[
@@ -378,6 +384,7 @@ ITIN.forEach((d,i)=>{
           <div class="card-head"><span class="time">${s.time}</span><span class="chip">${TYPE_LABEL[s.type]}</span></div>
           <h3>${s.name}${s.resv?` <span class="resv">（${s.resv}）</span>`:''}</h3>
           <p class="note">${s.note}</p>
+          ${s.nonav?'':`<div class="card-foot"><a class="nav-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(s.q||s.name)}&travelmode=driving">${svg('nav')}<span>導航</span></a></div>`}
         </div></div>`;
     }
   });
