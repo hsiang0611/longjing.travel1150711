@@ -1,0 +1,16 @@
+{
+  "name": "盛夏三日漫旅 0711–0713",
+  "short_name": "漫旅行程",
+  "description": "淡水・北海岸・宜蘭礁溪 三天兩夜行程表",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4eee1",
+  "theme_color": "#1c6b86",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
