@@ -187,6 +187,31 @@
   .risk.high{background:#d24b3e;animation:pulse 1.7s infinite;}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(210,75,62,.55);}50%{box-shadow:0 0 0 6px rgba(210,75,62,0);}}
 
+  /* ---------- COUNTDOWN ---------- */
+  .countdown{margin:8px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 14px 18px;text-align:center;position:relative;overflow:hidden;box-shadow:0 10px 26px -20px rgba(60,50,30,.6);}
+  .countdown::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(100deg,#1c6b86,#3f7a4a,#c06632);}
+  .cd-label{font-family:"Noto Serif TC",serif;font-size:13.5px;color:#5b5446;letter-spacing:.12em;margin-bottom:13px;}
+  .countdown.live .cd-label{color:#327a42;font-weight:600;}
+  .countdown.done .cd-label{color:#c06632;font-weight:600;font-size:15px;margin-bottom:0;}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3f9a52;margin-right:8px;vertical-align:middle;animation:blink 1.2s infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+  .cd-blocks{display:flex;justify-content:center;gap:9px;}
+  .cd-blocks>div{flex:1;max-width:78px;background:#faf4e8;border:1px solid var(--line);border-radius:13px;padding:10px 4px 8px;}
+  .cd-num{font-family:"Fraunces",serif;font-weight:600;font-size:31px;color:#2c2820;line-height:1;display:block;font-variant-numeric:tabular-nums;}
+  .countdown.live .cd-num{color:#327a42;}
+  .cd-unit{font-size:11px;color:var(--muted);margin-top:5px;display:block;letter-spacing:.14em;}
+
+  /* ---------- ROOMS ---------- */
+  .rooms{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;}
+  .rooms h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:#5b5446;letter-spacing:.08em;margin-bottom:14px;}
+  .floor{margin-bottom:14px;}
+  .floor:last-child{margin-bottom:0;}
+  .floor-label{font-family:"Fraunces",serif;font-size:12px;color:var(--muted);letter-spacing:.18em;margin-bottom:8px;}
+  .room-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .room{background:#faf4e8;border:1px solid var(--line);border-radius:13px;padding:11px 6px;text-align:center;}
+  .room-no{font-family:"Fraunces",serif;font-weight:600;font-size:22px;color:#1c6b86;line-height:1;}
+  .room-names{font-family:"Noto Serif TC",serif;font-size:13.5px;color:#2c2820;margin-top:5px;letter-spacing:.04em;}
+
   .seg{border-top:1px solid var(--line);padding:11px 0;}
   .seg:first-child{border-top:none;padding-top:4px;}
   .seg-top{display:flex;align-items:center;gap:9px;}
@@ -240,9 +265,39 @@
     </div>
   </header>
 
+  <div class="countdown" id="countdown">
+    <div class="cd-label" id="cd-label">計算中…</div>
+    <div class="cd-blocks">
+      <div><span class="cd-num" id="cd-d">--</span><span class="cd-unit">天</span></div>
+      <div><span class="cd-num" id="cd-h">--</span><span class="cd-unit">時</span></div>
+      <div><span class="cd-num" id="cd-m">--</span><span class="cd-unit">分</span></div>
+      <div><span class="cd-num" id="cd-s">--</span><span class="cd-unit">秒</span></div>
+    </div>
+  </div>
+
   <nav class="tabs" id="tabs"></nav>
 
   <main id="days"></main>
+
+  <section class="rooms">
+    <h4>住宿房間資訊 ‧ 礁溪 320 山館</h4>
+    <div class="floor">
+      <div class="floor-label">2 樓</div>
+      <div class="room-grid">
+        <div class="room"><div class="room-no">201</div><div class="room-names">詠丞</div></div>
+        <div class="room"><div class="room-no">202</div><div class="room-names">厚任</div></div>
+        <div class="room"><div class="room-no">203</div><div class="room-names">真益</div></div>
+        <div class="room"><div class="room-no">205</div><div class="room-names">義翔</div></div>
+      </div>
+    </div>
+    <div class="floor">
+      <div class="floor-label">3 樓</div>
+      <div class="room-grid">
+        <div class="room"><div class="room-no">301</div><div class="room-names">彥良</div></div>
+        <div class="room"><div class="room-no">302</div><div class="room-names">子墉</div></div>
+      </div>
+    </div>
+  </section>
 
   <section class="legend">
     <h4>圖例</h4>
@@ -512,6 +567,31 @@ function renderClimo(d,dl){
     <div class="wx-foot"><span>出發日超出 16 天預報，顯示氣候概況</span>${REFRESH_BTN}</div>`);
 }
 loadWeather();
+
+/* ---------- countdown ---------- */
+const TRIP_START=new Date(TRIP_YEAR,6,11,7,30,0);
+const TRIP_END=new Date(TRIP_YEAR,6,13,21,10,0);
+const pad2=n=>String(n).padStart(2,'0');
+let cdTimer;
+function tickCD(){
+  const now=new Date(), cd=document.getElementById('countdown');
+  let target,label;
+  if(now<TRIP_START){target=TRIP_START;label='距離出發還有';cd.classList.remove('live');}
+  else if(now<TRIP_END){target=TRIP_END;label='活動進行中 ‧ 距離結束還有';cd.classList.add('live');}
+  else{
+    cd.classList.remove('live');cd.classList.add('done');
+    document.getElementById('cd-label').textContent='行程圓滿結束 ‧ 平安回家 🏡';
+    document.querySelector('.cd-blocks').style.display='none';
+    clearInterval(cdTimer);return;
+  }
+  const diff=Math.max(0,target-now);
+  document.getElementById('cd-d').textContent=pad2(Math.floor(diff/86400000));
+  document.getElementById('cd-h').textContent=pad2(Math.floor(diff%86400000/3600000));
+  document.getElementById('cd-m').textContent=pad2(Math.floor(diff%3600000/60000));
+  document.getElementById('cd-s').textContent=pad2(Math.floor(diff%60000/1000));
+  document.getElementById('cd-label').innerHTML=(cd.classList.contains('live')?'<span class="live-dot"></span>':'')+label;
+}
+tickCD();cdTimer=setInterval(tickCD,1000);
 
 /* reveal cards on scroll */
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
