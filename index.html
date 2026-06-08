@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1c6b86">
 <title>盛夏三日漫旅 ‧ 07.11–07.13</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="漫旅行程">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
@@ -13,12 +19,31 @@
     --paper:#f4eee1;
     --card:#fffdf7;
     --ink:#2c2820;
+    --ink2:#5b5446;
     --muted:#8c8273;
     --line:#e4dcc9;
+    --tile:#faf4e8;
+    --surface:#ffffff;
+    --tabs-bg:rgba(244,238,225,.82);
     --accent:#1c6b86;
     --accent-deep:#114a5e;
     --accent-soft:#e7f1f4;
   }
+  body.dark{
+    --paper:#15120d;--card:#221d15;--ink:#f1e9d9;--ink2:#c5baa4;--muted:#9c917c;
+    --line:#3a3122;--tile:#2b2417;--surface:#2b2417;--tabs-bg:rgba(21,18,13,.86);
+  }
+  body.dark{background:radial-gradient(120% 60% at 50% -10%,#1f1a10 0%,var(--paper) 55%),var(--paper);}
+  body.dark .day[data-theme="coast"]{--accent-soft:rgba(58,155,191,.16);}
+  body.dark .day[data-theme="mountain"]{--accent-soft:rgba(74,138,90,.16);}
+  body.dark .day[data-theme="sunset"]{--accent-soft:rgba(192,102,50,.18);}
+  body.dark .tabs{background:var(--tabs-bg);}
+  body.dark .tab{color:var(--muted);}
+  body.dark .route span,body.dark .travel-pill,body.dark .wx-advice,body.dark .wx-refresh,body.dark .btn.ghost{background:var(--surface);}
+  body.dark .route span,body.dark .travel-pill{color:var(--ink2);}
+  body.dark .meta{background:rgba(255,255,255,.05);}
+  body.dark .legend .li{background:#4a4231;}
+  body.dark .hero .scene circle{fill-opacity:.95;}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth;}
   body{
@@ -49,11 +74,11 @@
     background:linear-gradient(100deg,#1c6b86 0%,#3f7a4a 52%,#c06632 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .hero .sub{font-family:"Noto Serif TC",serif;font-size:15px;color:#5b5446;letter-spacing:.14em;}
+  .hero .sub{font-family:"Noto Serif TC",serif;font-size:15px;color:var(--ink2);letter-spacing:.14em;}
   .scene{display:block;width:118px;height:46px;margin:16px auto 14px;}
   .hero .meta{
     display:inline-flex;align-items:center;gap:10px;
-    font-family:"Fraunces",serif;font-size:14px;color:#5b5446;
+    font-family:"Fraunces",serif;font-size:14px;color:var(--ink2);
     border:1px solid var(--line);border-radius:999px;padding:7px 16px;background:rgba(255,255,255,.5);
   }
   .hero .meta b{font-weight:600;}
@@ -174,7 +199,7 @@
   .wx-grid div.cell{background:var(--accent-soft);border-radius:11px;padding:8px 4px;text-align:center;}
   .wx-grid .k{font-size:10.5px;color:var(--muted);line-height:1.3;}
   .wx-grid .v{font-family:"Fraunces",serif;font-weight:600;font-size:17px;color:var(--accent-deep);line-height:1.2;}
-  .wx-advice{font-size:12.5px;color:#5b5446;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:7px 11px;margin-bottom:6px;}
+  .wx-advice{font-size:12.5px;color:var(--ink2);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:7px 11px;margin-bottom:6px;}
   .today-line{font-size:12px;color:var(--muted);margin:8px 0 2px;}
   .wx-foot{font-size:11px;color:var(--muted);margin-top:9px;font-family:"Fraunces",serif;display:flex;align-items:center;gap:8px;justify-content:space-between;}
   .wx-refresh{border:1px solid var(--line);background:#fff;border-radius:999px;font-size:11px;padding:4px 11px;color:var(--accent);cursor:pointer;font-family:inherit;}
@@ -190,34 +215,34 @@
   /* ---------- COUNTDOWN ---------- */
   .countdown{margin:8px 0 4px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 14px 18px;text-align:center;position:relative;overflow:hidden;box-shadow:0 10px 26px -20px rgba(60,50,30,.6);}
   .countdown::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(100deg,#1c6b86,#3f7a4a,#c06632);}
-  .cd-label{font-family:"Noto Serif TC",serif;font-size:13.5px;color:#5b5446;letter-spacing:.12em;margin-bottom:13px;}
+  .cd-label{font-family:"Noto Serif TC",serif;font-size:13.5px;color:var(--ink2);letter-spacing:.12em;margin-bottom:13px;}
   .countdown.live .cd-label{color:#327a42;font-weight:600;}
   .countdown.done .cd-label{color:#c06632;font-weight:600;font-size:15px;margin-bottom:0;}
   .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3f9a52;margin-right:8px;vertical-align:middle;animation:blink 1.2s infinite;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
   .cd-blocks{display:flex;justify-content:center;gap:9px;}
-  .cd-blocks>div{flex:1;max-width:78px;background:#faf4e8;border:1px solid var(--line);border-radius:13px;padding:10px 4px 8px;}
-  .cd-num{font-family:"Fraunces",serif;font-weight:600;font-size:31px;color:#2c2820;line-height:1;display:block;font-variant-numeric:tabular-nums;}
+  .cd-blocks>div{flex:1;max-width:78px;background:var(--tile);border:1px solid var(--line);border-radius:13px;padding:10px 4px 8px;}
+  .cd-num{font-family:"Fraunces",serif;font-weight:600;font-size:31px;color:var(--ink);line-height:1;display:block;font-variant-numeric:tabular-nums;}
   .countdown.live .cd-num{color:#327a42;}
   .cd-unit{font-size:11px;color:var(--muted);margin-top:5px;display:block;letter-spacing:.14em;}
 
   /* ---------- ROOMS ---------- */
   .rooms{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;}
-  .rooms h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:#5b5446;letter-spacing:.08em;margin-bottom:14px;}
+  .rooms h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:var(--ink2);letter-spacing:.08em;margin-bottom:14px;}
   .floor{margin-bottom:14px;}
   .floor:last-child{margin-bottom:0;}
   .floor-label{font-family:"Fraunces",serif;font-size:12px;color:var(--muted);letter-spacing:.18em;margin-bottom:8px;}
   .room-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-  .room{background:#faf4e8;border:1px solid var(--line);border-radius:13px;padding:11px 6px;text-align:center;}
+  .room{background:var(--tile);border:1px solid var(--line);border-radius:13px;padding:11px 6px;text-align:center;}
   .room-no{font-family:"Fraunces",serif;font-weight:600;font-size:22px;color:#1c6b86;line-height:1;}
-  .room-names{font-family:"Noto Serif TC",serif;font-size:13.5px;color:#2c2820;margin-top:5px;letter-spacing:.04em;}
+  .room-names{font-family:"Noto Serif TC",serif;font-size:13.5px;color:var(--ink);margin-top:5px;letter-spacing:.04em;}
 
   .seg{border-top:1px solid var(--line);padding:11px 0;}
   .seg:first-child{border-top:none;padding-top:4px;}
   .seg-top{display:flex;align-items:center;gap:9px;}
   .seg-top b{font-family:"Noto Serif TC",serif;font-size:14px;}
   .seg-dir{font-size:12px;color:var(--muted);margin:4px 0 5px;letter-spacing:.03em;}
-  .seg-tip{font-size:12.5px;color:#5b5446;line-height:1.65;}
+  .seg-tip{font-size:12.5px;color:var(--ink2);line-height:1.65;}
   .seg-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;}
   .btn{font-size:12px;padding:6px 13px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:500;}
   .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent);}
@@ -229,13 +254,46 @@
     margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:18px;
     padding:16px 18px;
   }
-  .legend h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:#5b5446;letter-spacing:.1em;margin-bottom:12px;}
+  .legend h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:var(--ink2);letter-spacing:.1em;margin-bottom:12px;}
   .legend ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;}
-  .legend li{display:flex;align-items:center;gap:9px;font-size:13px;color:#5b5446;}
+  .legend li{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink2);}
   .legend .li{width:30px;height:30px;border-radius:50%;background:#6b6353;display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 30px;}
   .legend .li svg{width:16px;height:16px;}
 
   footer{text-align:center;margin-top:26px;font-size:12px;color:var(--muted);letter-spacing:.1em;font-family:"Fraunces",serif;}
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{display:flex;justify-content:flex-end;gap:8px;padding:12px 0 0;}
+  .tool-btn{font-size:12.5px;font-family:inherit;color:var(--ink2);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;line-height:1.4;}
+  .tool-btn:active{filter:brightness(.95);}
+
+  /* ---------- CURRENT-STOP HIGHLIGHT ---------- */
+  .row.stop.past .card{opacity:.5;}
+  .row.stop.past .node{opacity:.55;}
+  .row.stop.current .card{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent),0 12px 28px -14px var(--accent-deep);}
+  .now-badge{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:600;color:#fff;background:var(--accent);padding:5px 12px;border-radius:999px;letter-spacing:.03em;}
+  .now-badge .dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s infinite;}
+  .next-tag{display:inline-block;margin-top:10px;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 11px;font-weight:600;letter-spacing:.04em;}
+  .jump-now{position:fixed;right:16px;bottom:18px;z-index:50;display:none;align-items:center;gap:6px;background:#1c6b86;color:#fff;border:none;border-radius:999px;padding:11px 17px;font-family:inherit;font-size:13px;font-weight:600;box-shadow:0 10px 22px -8px rgba(0,0,0,.5);cursor:pointer;}
+  .jump-now.show{display:inline-flex;}
+  .jump-now:active{filter:brightness(.93);}
+
+  /* ---------- CONTACTS / 一鍵撥號 ---------- */
+  .contacts{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;}
+  .contacts h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:var(--ink2);letter-spacing:.08em;margin-bottom:14px;}
+  .contact-group{margin-bottom:15px;}
+  .contact-group:last-child{margin-bottom:0;}
+  .cg-label{font-family:"Fraunces",serif;font-size:12px;color:var(--muted);letter-spacing:.16em;margin-bottom:8px;}
+  .contact{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line);border-radius:13px;text-decoration:none;color:var(--ink);margin-bottom:8px;background:var(--tile);}
+  .contact:last-child{margin-bottom:0;}
+  .contact:active{filter:brightness(.96);}
+  .c-ic{font-size:19px;width:24px;text-align:center;flex:0 0 24px;}
+  .c-main{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .c-main b{font-family:"Noto Serif TC",serif;font-size:14.5px;font-weight:600;}
+  .c-main small{font-size:11px;color:var(--muted);margin-top:1px;}
+  .c-num{font-family:"Fraunces",serif;font-weight:600;font-size:14px;color:#1c6b86;white-space:nowrap;letter-spacing:.02em;}
+  .contact.placeholder .c-num{color:var(--muted);}
+  body.dark .c-num{color:#5aa6c2;}
 
   @media (max-width:360px){
     .hero h1{font-size:34px;}
@@ -245,6 +303,11 @@
 </head>
 <body>
 <div class="wrap">
+
+  <div class="toolbar">
+    <button class="tool-btn" id="icsBtn">📅 加入行事曆</button>
+    <button class="tool-btn" id="themeBtn" aria-label="切換深色模式">🌙</button>
+  </div>
 
   <header class="hero">
     <div class="eyebrow">Summer Itinerary</div>
@@ -279,6 +342,30 @@
 
   <main id="days"></main>
 
+  <section class="contacts">
+    <h4>緊急聯絡 ‧ 一鍵撥號</h4>
+    <div class="contact-group">
+      <div class="cg-label">住宿・預約（點擊撥號）</div>
+      <a class="contact" href="tel:0921547995"><span class="c-ic">🏨</span><span class="c-main"><b>礁溪 320 山館</b><small>住宿</small></span><span class="c-num">0921-547-995</span></a>
+      <a class="contact" href="tel:0224982385"><span class="c-ic">🍴</span><span class="c-main"><b>田中芳園</b><small>D1 午餐 ‧ 預約 11:00</small></span><span class="c-num">02-2498-2385</span></a>
+      <a class="contact" href="tel:039892789"><span class="c-ic">🎨</span><span class="c-main"><b>三星四季青花瓷</b><small>D2 手作 ‧ 預約 13:00</small></span><span class="c-num">03-989-2789</span></a>
+      <a class="contact" href="tel:039601777"><span class="c-ic">🍴</span><span class="c-main"><b>饗宴鐵板燒</b><small>D3 午餐 ‧ 預約 11:30</small></span><span class="c-num">03-960-1777</span></a>
+    </div>
+    <div class="contact-group">
+      <div class="cg-label">緊急 / 路況</div>
+      <a class="contact" href="tel:110"><span class="c-ic">🚓</span><span class="c-main"><b>警察報案</b><small>110</small></span><span class="c-num">110</span></a>
+      <a class="contact" href="tel:119"><span class="c-ic">🚑</span><span class="c-main"><b>消防 / 救護</b><small>119</small></span><span class="c-num">119</span></a>
+      <a class="contact" href="tel:112"><span class="c-ic">📱</span><span class="c-main"><b>行動電話緊急</b><small>無訊號時可撥</small></span><span class="c-num">112</span></a>
+      <a class="contact" href="tel:1968"><span class="c-ic">🛣️</span><span class="c-main"><b>高速公路即時路況</b><small>國道救援 / 路況</small></span><span class="c-num">1968</span></a>
+    </div>
+    <!-- 以下為範例號碼，請在這裡替換成領隊與司機的實際電話 -->
+    <div class="contact-group">
+      <div class="cg-label">團隊（請替換為實際號碼）</div>
+      <a class="contact placeholder" href="tel:0912345678"><span class="c-ic">🧑‍✈️</span><span class="c-main"><b>領隊</b><small>範例，請替換</small></span><span class="c-num">0912-345-678</span></a>
+      <a class="contact placeholder" href="tel:0912345678"><span class="c-ic">🚐</span><span class="c-main"><b>司機</b><small>範例，請替換</small></span><span class="c-num">0912-345-678</span></a>
+    </div>
+  </section>
+
   <section class="legend">
     <h4>圖例</h4>
     <ul id="legend"></ul>
@@ -288,6 +375,8 @@
 
   <footer>行程結束 ‧ 平安回家 🏡</footer>
 </div>
+
+<button class="jump-now" id="jumpNow">📍 目前進度</button>
 
 <script>
 /* ---------- icons ---------- */
@@ -361,6 +450,7 @@ const ITIN = [
 const _now=new Date();
 let TRIP_YEAR=_now.getFullYear();
 if(new Date(TRIP_YEAR,6,13) < new Date(_now.getFullYear(),_now.getMonth(),_now.getDate())) TRIP_YEAR++;
+function stopMs(day,time){const [h,m]=time.split(':').map(Number);return new Date(TRIP_YEAR,6,10+day,h,m,0).getTime();}
 
 const RISK={low:'低',mid:'中',high:'高'};
 const WMAP={0:['☀️','晴朗'],1:['🌤️','晴時多雲'],2:['⛅','多雲'],3:['☁️','陰天'],
@@ -414,7 +504,7 @@ ITIN.forEach((d,i)=>{
       rows+=`<div class="row travel"><div class="rail"></div>
         <div class="travel-pill">${svg('car')}${s.depart?`<b>${s.depart}</b> ‧ `:''}<b>${s.travel}</b> 車程</div></div>`;
     }else{
-      rows+=`<div class="row stop"><div class="rail"><div class="node">${svg(TYPE_ICON[s.type])}</div></div>
+      rows+=`<div class="row stop" data-dt="${stopMs(d.day,s.time)}"><div class="rail"><div class="node">${svg(TYPE_ICON[s.type])}</div></div>
         <div class="card">
           <div class="card-head"><span class="time">${s.time}</span><span class="chip">${TYPE_LABEL[s.type]}</span></div>
           <h3>${s.name}${s.resv?` <span class="resv">（${s.resv}）</span>`:''}</h3>
@@ -593,6 +683,75 @@ function tickCD(){
   document.getElementById('cd-label').innerHTML=(cd.classList.contains('live')?'<span class="live-dot"></span>':'')+label;
 }
 tickCD();cdTimer=setInterval(tickCD,1000);
+
+/* ---------- dark mode ---------- */
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(dark){
+  document.body.classList.toggle('dark',dark);
+  themeBtn.textContent=dark?'☀️':'🌙';
+  const mt=document.querySelector('meta[name="theme-color"]'); if(mt)mt.setAttribute('content',dark?'#15120d':'#1c6b86');
+  try{localStorage.setItem('tripDark',dark?'1':'0');}catch(e){}
+}
+let _saved=null; try{_saved=localStorage.getItem('tripDark');}catch(e){}
+applyTheme(_saved===null ? matchMedia('(prefers-color-scheme: dark)').matches : _saved==='1');
+themeBtn.onclick=()=>applyTheme(!document.body.classList.contains('dark'));
+
+/* ---------- 加入行事曆 (.ics) ---------- */
+function icsEsc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n');}
+function dtStr(day,mins){return `${TRIP_YEAR}07${pad2(10+day)}T${pad2(Math.floor(mins/60))}${pad2(mins%60)}00`;}
+function buildFlat(){
+  const flat=[];
+  ITIN.forEach(d=>d.stops.forEach(s=>{ if(s.time){const [h,m]=s.time.split(':').map(Number);flat.push({day:d.day,mins:h*60+m,name:s.name,note:s.note||'',q:s.q||s.name});} }));
+  flat.forEach((e,i)=>{const n=flat[i+1];
+    if(n && n.day===e.day){e.endDay=e.day;e.endMins=Math.min(e.mins+180,n.mins); if(e.endMins<=e.mins)e.endMins=e.mins+60;}
+    else{e.endDay=e.day;e.endMins=Math.min(e.mins+60,1439);}
+  });
+  return flat;
+}
+function makeICS(){
+  const flat=buildFlat();
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//manlu//itinerary//TW','CALSCALE:GREGORIAN','X-WR-CALNAME:盛夏三日漫旅 0711-0713'];
+  flat.forEach((e,i)=>{
+    L.push('BEGIN:VEVENT',`UID:manlu-${e.day}-${i}@itinerary`,`DTSTAMP:${stamp}`,
+      `DTSTART:${dtStr(e.day,e.mins)}`,`DTEND:${dtStr(e.endDay,e.endMins)}`,
+      `SUMMARY:${icsEsc(e.name)}`,`LOCATION:${icsEsc(e.q)}`,`DESCRIPTION:${icsEsc(e.note)}`,
+      'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY',`DESCRIPTION:${icsEsc(e.name)}`,'END:VALARM','END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  const blob=new Blob([L.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='盛夏三日漫旅.ics';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
+document.getElementById('icsBtn').onclick=makeICS;
+
+/* ---------- 即時高亮目前站 ---------- */
+const jumpNow=document.getElementById('jumpNow');
+function updateProgress(){
+  const rows=[...document.querySelectorAll('.row.stop[data-dt]')];
+  if(!rows.length)return;
+  const now=Date.now(), endMs=TRIP_END.getTime();
+  rows.forEach(r=>{r.classList.remove('past','current','next');const b=r.querySelector('.now-badge,.next-tag');if(b)b.remove();});
+  if(now>=endMs){rows.forEach(r=>r.classList.add('past'));jumpNow.classList.remove('show');return;}
+  let cur=-1; rows.forEach((r,i)=>{if(+r.dataset.dt<=now)cur=i;});
+  if(cur<0){jumpNow.classList.remove('show');return;}            // 尚未出發
+  rows.forEach((r,i)=>{if(i<cur)r.classList.add('past');});
+  rows[cur].classList.add('current');
+  const curCard=rows[cur].querySelector('.card');
+  const next=rows[cur+1];
+  let badge='<span class="now-badge"><span class="dot"></span>進行中';
+  if(next){const mins=Math.max(0,Math.round((+next.dataset.dt-now)/60000)),hh=Math.floor(mins/60),mm=mins%60;
+    badge+=` ‧ 距下一站 ${hh>0?hh+' 時 ':''}${mm} 分`;}
+  curCard.insertAdjacentHTML('beforeend',badge+'</span>');
+  if(next){next.classList.add('next');next.querySelector('.card').insertAdjacentHTML('beforeend','<span class="next-tag">下一站</span>');}
+  jumpNow.classList.add('show');
+}
+jumpNow.onclick=()=>{const c=document.querySelector('.row.stop.current');if(c)c.scrollIntoView({behavior:'smooth',block:'center'});};
+updateProgress();setInterval(updateProgress,20000);
+
+/* ---------- 離線可用 (PWA) ---------- */
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 
 /* reveal cards on scroll */
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
