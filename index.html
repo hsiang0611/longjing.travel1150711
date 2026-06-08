@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c6b86">
+<title>盛夏三日漫旅 ‧ 07.11–07.13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4eee1;
+    --card:#fffdf7;
+    --ink:#2c2820;
+    --muted:#8c8273;
+    --line:#e4dcc9;
+    --accent:#1c6b86;
+    --accent-deep:#114a5e;
+    --accent-soft:#e7f1f4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans TC",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(120% 60% at 50% -10%, #fbf6ec 0%, var(--paper) 55%),
+      var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  /* faint paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 16px 60px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:38px 4px 26px;text-align:center;position:relative;}
+  .hero .eyebrow{
+    font-family:"Fraunces",serif;letter-spacing:.42em;font-size:11px;
+    text-transform:uppercase;color:var(--muted);font-weight:500;padding-left:.42em;
+  }
+  .hero h1{
+    font-family:"Noto Serif TC",serif;font-weight:900;font-size:40px;
+    letter-spacing:.04em;margin:10px 0 6px;line-height:1.18;
+    background:linear-gradient(100deg,#1c6b86 0%,#3f7a4a 52%,#c06632 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .sub{font-family:"Noto Serif TC",serif;font-size:15px;color:#5b5446;letter-spacing:.14em;}
+  .scene{display:block;width:118px;height:46px;margin:16px auto 14px;}
+  .hero .meta{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:"Fraunces",serif;font-size:14px;color:#5b5446;
+    border:1px solid var(--line);border-radius:999px;padding:7px 16px;background:rgba(255,255,255,.5);
+  }
+  .hero .meta b{font-weight:600;}
+  .hero .meta .dot{width:4px;height:4px;border-radius:50%;background:var(--muted);}
+  .route{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px;}
+  .route span{
+    font-size:12px;color:#6b6353;background:#fff;border:1px solid var(--line);
+    padding:3px 10px;border-radius:999px;letter-spacing:.05em;
+  }
+  .route .arrow{border:none;background:none;color:var(--muted);padding:3px 0;}
+
+  /* ---------- STICKY TABS ---------- */
+  .tabs{
+    position:sticky;top:0;z-index:20;display:flex;gap:6px;
+    padding:10px 8px;margin:4px -8px 8px;
+    background:rgba(244,238,225,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .tab{
+    flex:1;text-align:center;font-family:"Noto Serif TC",serif;font-weight:600;
+    font-size:14px;padding:9px 0;border-radius:12px;cursor:pointer;
+    color:#6b6353;border:1px solid transparent;transition:.25s;background:transparent;
+  }
+  .tab .d{font-family:"Fraunces",serif;font-size:11px;letter-spacing:.1em;display:block;opacity:.7;}
+  .tab.active{color:#fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.35);}
+  .tab[data-theme="coast"].active{background:#1c6b86;}
+  .tab[data-theme="mountain"].active{background:#3f7a4a;}
+  .tab[data-theme="sunset"].active{background:#c06632;}
+
+  /* ---------- DAY ---------- */
+  .day{scroll-margin-top:74px;margin-top:26px;}
+  .day[data-theme="coast"]{--accent:#1c6b86;--accent-deep:#0f4456;--accent-soft:#e7f1f4;}
+  .day[data-theme="mountain"]{--accent:#3f7a4a;--accent-deep:#274f2d;--accent-soft:#e9f1e7;}
+  .day[data-theme="sunset"]{--accent:#c06632;--accent-deep:#8c481c;--accent-soft:#f8ead9;}
+
+  .day-head{
+    display:flex;align-items:flex-end;gap:14px;padding:16px 18px;border-radius:20px;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
+    color:#fff;position:relative;overflow:hidden;box-shadow:0 12px 28px -16px var(--accent-deep);
+  }
+  .day-head::after{
+    content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;
+    background:rgba(255,255,255,.10);
+  }
+  .day-head .num{font-family:"Fraunces",serif;font-weight:600;font-size:54px;line-height:.85;}
+  .day-head .info .label{font-family:"Fraunces",serif;letter-spacing:.3em;font-size:10px;opacity:.85;text-transform:uppercase;}
+  .day-head .info h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;letter-spacing:.04em;margin-top:2px;}
+  .day-head .info .date{font-size:13px;opacity:.92;letter-spacing:.1em;margin-top:3px;font-family:"Fraunces",serif;}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{padding:8px 0 4px;}
+  .row{display:flex;position:relative;}
+  .rail{width:46px;flex:0 0 46px;position:relative;}
+  .rail::before{
+    content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;
+    background:var(--line);
+  }
+  .stop:first-of-type .rail::before{top:28px;}
+  .timeline .stop:last-of-type .rail::before{bottom:auto;height:28px;}
+
+  .node{
+    position:absolute;left:50%;top:14px;transform:translateX(-50%);
+    width:34px;height:34px;border-radius:50%;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 4px 10px -4px var(--accent-deep);border:3px solid var(--card);z-index:2;
+  }
+  .node svg{width:18px;height:18px;}
+
+  .card{
+    flex:1;margin:8px 0 8px 4px;background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:13px 15px 14px;box-shadow:0 8px 22px -18px rgba(60,50,30,.6);
+    opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;
+  }
+  .card.in{opacity:1;transform:none;}
+  .card-head{display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;}
+  .time{font-family:"Fraunces",serif;font-weight:600;font-size:19px;color:var(--accent-deep);letter-spacing:.02em;}
+  .chip{
+    font-size:11px;font-weight:500;color:var(--accent-deep);background:var(--accent-soft);
+    padding:2px 9px;border-radius:999px;letter-spacing:.06em;
+  }
+  .card h3{font-family:"Noto Serif TC",serif;font-weight:600;font-size:17px;letter-spacing:.02em;margin:2px 0 0;}
+  .card .resv{font-size:12px;color:var(--accent);font-weight:500;}
+  .card .note{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.02em;}
+
+  /* travel pill */
+  .travel{align-items:center;}
+  .travel .rail::before{background:repeating-linear-gradient(var(--accent) 0 5px,transparent 5px 11px);opacity:.55;}
+  .travel-pill{
+    display:inline-flex;align-items:center;gap:7px;margin:2px 0 2px 4px;
+    font-size:12.5px;color:#6b6353;background:#fff;border:1px solid var(--line);
+    padding:5px 12px;border-radius:999px;letter-spacing:.04em;
+  }
+  .travel-pill svg{width:16px;height:16px;color:var(--accent);}
+  .travel-pill b{color:var(--ink);font-weight:600;}
+
+  /* ---------- INFO CARDS (weather / traffic) ---------- */
+  .info-strip{display:flex;flex-direction:column;gap:10px;margin:14px 0 2px;}
+  .ic{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px -18px rgba(60,50,30,.6);}
+  .ic-head{display:flex;align-items:center;gap:11px;padding:12px 14px;cursor:pointer;user-select:none;}
+  .ic-ico{font-size:23px;line-height:1;width:30px;text-align:center;flex:0 0 30px;}
+  .ic-ico.road{filter:saturate(.9);}
+  .ic-main{flex:1;min-width:0;}
+  .ic-title{display:block;font-family:"Noto Serif TC",serif;font-weight:600;font-size:15px;}
+  .ic-sub{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ic-right{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
+  .ic-temp{font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:var(--accent-deep);}
+  .chev{font-size:11px;color:var(--muted);transition:transform .3s;}
+  .ic.open .chev{transform:rotate(180deg);}
+  .ic-body{max-height:0;overflow:hidden;transition:max-height .45s ease;}
+  .ic.open .ic-body{max-height:720px;}
+  .ic-inner{padding:2px 14px 14px;}
+
+  .wx-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:4px 0 10px;}
+  .wx-grid div.cell{background:var(--accent-soft);border-radius:11px;padding:8px 4px;text-align:center;}
+  .wx-grid .k{font-size:10.5px;color:var(--muted);line-height:1.3;}
+  .wx-grid .v{font-family:"Fraunces",serif;font-weight:600;font-size:17px;color:var(--accent-deep);line-height:1.2;}
+  .wx-advice{font-size:12.5px;color:#5b5446;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:7px 11px;margin-bottom:6px;}
+  .today-line{font-size:12px;color:var(--muted);margin:8px 0 2px;}
+  .wx-foot{font-size:11px;color:var(--muted);margin-top:9px;font-family:"Fraunces",serif;display:flex;align-items:center;gap:8px;justify-content:space-between;}
+  .wx-refresh{border:1px solid var(--line);background:#fff;border-radius:999px;font-size:11px;padding:4px 11px;color:var(--accent);cursor:pointer;font-family:inherit;}
+  .wx-refresh:active{background:var(--accent-soft);}
+  .wx-skeleton{padding:4px 0 2px;color:var(--muted);font-size:13px;}
+
+  .risk{font-size:12px;font-weight:600;padding:2px 11px;border-radius:999px;color:#fff;flex:0 0 auto;letter-spacing:.05em;}
+  .risk.low{background:#3f9a52;}
+  .risk.mid{background:#d8922f;}
+  .risk.high{background:#d24b3e;animation:pulse 1.7s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(210,75,62,.55);}50%{box-shadow:0 0 0 6px rgba(210,75,62,0);}}
+
+  .seg{border-top:1px solid var(--line);padding:11px 0;}
+  .seg:first-child{border-top:none;padding-top:4px;}
+  .seg-top{display:flex;align-items:center;gap:9px;}
+  .seg-top b{font-family:"Noto Serif TC",serif;font-size:14px;}
+  .seg-dir{font-size:12px;color:var(--muted);margin:4px 0 5px;letter-spacing:.03em;}
+  .seg-tip{font-size:12.5px;color:#5b5446;line-height:1.65;}
+  .seg-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;}
+  .btn{font-size:12px;padding:6px 13px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:500;}
+  .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent);}
+
+  .src-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.7;padding:0 8px;}
+
+  /* ---------- LEGEND ---------- */
+  .legend{
+    margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:16px 18px;
+  }
+  .legend h4{font-family:"Noto Serif TC",serif;font-size:14px;font-weight:600;color:#5b5446;letter-spacing:.1em;margin-bottom:12px;}
+  .legend ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;}
+  .legend li{display:flex;align-items:center;gap:9px;font-size:13px;color:#5b5446;}
+  .legend .li{width:30px;height:30px;border-radius:50%;background:#6b6353;display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 30px;}
+  .legend .li svg{width:16px;height:16px;}
+
+  footer{text-align:center;margin-top:26px;font-size:12px;color:var(--muted);letter-spacing:.1em;font-family:"Fraunces",serif;}
+
+  @media (max-width:360px){
+    .hero h1{font-size:34px;}
+    .day-head .num{font-size:46px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Summer Itinerary</div>
+    <h1>盛夏三日漫旅</h1>
+    <div class="sub">淡水 ‧ 北海岸 ‧ 宜蘭礁溪</div>
+    <svg class="scene" viewBox="0 0 120 46" fill="none">
+      <circle cx="60" cy="17" r="9" fill="#e7b04a" opacity=".85"/>
+      <path d="M0 38 L26 18 L44 34 L62 14 L82 33 L102 20 L120 38 Z" fill="#3f7a4a" opacity=".75"/>
+      <path d="M0 40 Q20 33 40 40 T80 40 T120 40 V46 H0 Z" fill="#1c6b86" opacity=".8"/>
+    </svg>
+    <div class="meta"><b>07.11</b><span class="dot"></span><b>07.13</b><span class="dot"></span>三天兩夜</div>
+    <div class="route">
+      <span>淡水</span><span class="arrow">→</span>
+      <span>北海岸</span><span class="arrow">→</span>
+      <span>宜蘭礁溪</span><span class="arrow">→</span>
+      <span>新竹</span><span class="arrow">→</span>
+      <span>台中</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <main id="days"></main>
+
+  <section class="legend">
+    <h4>圖例</h4>
+    <ul id="legend"></ul>
+  </section>
+
+  <p class="src-note">天氣為 Open-Meteo 即時預報（出發前 16 天內顯示實際預報，更早則顯示七月氣候概況）；國道路況為一般概況與尖峰提醒，實際請點各路段「即時路況」查詢。</p>
+
+  <footer>行程結束 ‧ 平安回家 🏡</footer>
+</div>
+
+<script>
+/* ---------- icons ---------- */
+const ICON = {
+  lodging:'<path d="M3 7v11M21 18v-5a3 3 0 0 0-3-3H3M3 14h18M7 10V8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/>',
+  meal:'<path d="M5 3v5a2 2 0 0 0 4 0V3M7 8v13M16 3c1.4 1 2 3.2 2 6.2S17.4 14 16 14V3zM17 14v7"/>',
+  coffee:'<path d="M5 9h11v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9zM16 10h2a2 2 0 0 1 0 4h-2M8 3v2M11 3v2"/>',
+  sight:'<path d="M3 9a2 2 0 0 1 2-2h1.5L8 5h8l1.5 2H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><circle cx="12" cy="13" r="3.4"/>',
+  craft:'<path d="M12 3a9 9 0 1 0 0 18c1 0 1.4-.8 1.4-1.4 0-.5-.3-.8-.3-1.3 0-.7.6-1.2 1.3-1.2H16a4 4 0 0 0 4-4c0-4.4-3.6-8.1-8-8.1z"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="16" cy="11" r="1"/>',
+  shopping:'<path d="M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 0 1 6 0v2"/>',
+  home:'<path d="M4 11l8-7 8 7M6 10v9h12v-9M10 19v-5h4v5"/>',
+  car:'<path d="M5 13l1.4-4.2A2 2 0 0 1 8.3 7.5h7.4a2 2 0 0 1 1.9 1.3L19 13M4 13h16v4H4zM7.5 17v1.5M16.5 17v1.5"/><circle cx="8" cy="17" r="1.3"/><circle cx="16" cy="17" r="1.3"/>'
+};
+function svg(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICON[name]||''}</svg>`;}
+
+const TYPE_LABEL = {lodging:'住宿',meal:'用餐',coffee:'下午茶',sight:'景點',craft:'手作活動',shopping:'購物',home:'返程'};
+const TYPE_ICON  = {lodging:'lodging',meal:'meal',coffee:'coffee',sight:'sight',craft:'craft',shopping:'shopping',home:'home'};
+
+/* ---------- data ---------- */
+const ITIN = [
+  {day:1,theme:'coast',title:'北海岸・藝術與海風',date:'07.11 (五)',stops:[
+    {time:'09:00',type:'lodging',name:'承億文旅 淡水吹風',note:'09:00 退房'},
+    {travel:'10 分鐘'},
+    {time:'09:10',type:'sight',name:'滬尾藝文休閒園區',note:'預計停留 1 小時'},
+    {travel:'1 小時'},
+    {time:'11:00',type:'meal',name:'田中芳園',resv:'預約 11:00',note:'午餐 ‧ 用餐時間 2 小時'},
+    {travel:'10 分鐘'},
+    {time:'13:10',type:'sight',name:'朱銘美術館',note:'預計停留 2 小時'},
+    {travel:'15 分鐘'},
+    {time:'15:25',type:'coffee',name:'拾浪咖啡',note:'下午茶喝咖啡 ‧ 預計停留 1 小時'},
+    {time:'16:55',type:'sight',name:'野柳地質公園',note:'營業至 18:00 ‧ 待到 18:00 閉館'},
+    {travel:'1 小時'},
+    {time:'19:00',type:'meal',name:'礁溪庄櫻桃谷',note:'晚餐'},
+    {travel:'10 分鐘'},
+    {time:'20:10',type:'lodging',name:'礁溪 320 山館',note:'辦理入住 ‧ 好好休息'}
+  ]},
+  {day:2,theme:'mountain',title:'宜蘭三星・山林手作',date:'07.12 (六)',stops:[
+    {time:'10:00',type:'lodging',name:'礁溪 320 山館',note:'10:00 出發'},
+    {travel:'10 分鐘'},
+    {time:'10:10',type:'sight',name:'中興文化創意園區',note:'預計停留 1 小時'},
+    {travel:'25 分鐘'},
+    {time:'11:00',type:'meal',name:'露露咖啡',note:'午餐 ‧ 用餐時間 1 小時'},
+    {travel:'5 分鐘'},
+    {time:'13:00',type:'craft',name:'三星四季青花瓷',resv:'手作活動',note:'預約場次 13:00–15:00'},
+    {travel:'5 分鐘'},
+    {time:'15:10',type:'sight',name:'溜溜三星',note:'預計停留 1.5 小時'},
+    {time:'16:45',type:'sight',name:'金車生技水產養殖研發中心',note:'預計停留 1 小時'},
+    {travel:'35 分鐘'},
+    {time:'17:55',type:'meal',name:'火山爆發雞',note:'晚餐'},
+    {travel:'10 分鐘'},
+    {time:'19:05',type:'lodging',name:'礁溪 320 山館',note:'好好休息'}
+  ]},
+  {day:3,theme:'sunset',title:'宜蘭→新竹・甜點伴手禮',date:'07.13 (日)',stops:[
+    {time:'11:00',type:'lodging',name:'礁溪 320 山館',note:'11:00 退房'},
+    {travel:'20 分鐘'},
+    {time:'11:30',type:'meal',name:'響宴鐵板燒',resv:'預約 11:30',note:'午餐 ‧ 用餐時間約 2 小時'},
+    {travel:'15 分鐘'},
+    {time:'13:45',type:'sight',name:'溪和水產觀光工廠',note:'預計停留 1.5 小時'},
+    {travel:'20 分鐘'},
+    {time:'15:20',type:'coffee',name:'等日初咖啡店',note:'預計停留 1 小時'},
+    {travel:'15 分鐘'},
+    {time:'16:50',type:'shopping',name:'三日和菓',note:'買日式大福 ‧ 預計停留 30 分鐘'},
+    {travel:'1 小時 40 分鐘',depart:'18:30 出發'},
+    {time:'20:10',type:'meal',name:'新竹藝軒私房料理',note:'晚餐'},
+    {travel:'1 小時'},
+    {time:'21:10',type:'home',name:'回台中',note:'行程結束 ‧ 平安回家'}
+  ]}
+];
+
+/* ---------- weather & national-highway data ---------- */
+const _now=new Date();
+let TRIP_YEAR=_now.getFullYear();
+if(new Date(TRIP_YEAR,6,13) < new Date(_now.getFullYear(),_now.getMonth(),_now.getDate())) TRIP_YEAR++;
+
+const RISK={low:'低',mid:'中',high:'高'};
+const WMAP={0:['☀️','晴朗'],1:['🌤️','晴時多雲'],2:['⛅','多雲'],3:['☁️','陰天'],
+  45:['🌫️','有霧'],48:['🌫️','霧淞'],51:['🌦️','毛毛雨'],53:['🌦️','毛毛雨'],55:['🌧️','毛毛雨'],
+  56:['🌧️','凍雨'],57:['🌧️','凍雨'],61:['🌦️','小雨'],63:['🌧️','降雨'],65:['🌧️','大雨'],
+  66:['🌧️','凍雨'],67:['🌧️','凍雨'],71:['🌨️','小雪'],73:['🌨️','降雪'],75:['❄️','大雪'],77:['🌨️','米雪'],
+  80:['🌦️','陣雨'],81:['🌧️','陣雨'],82:['⛈️','強陣雨'],85:['🌨️','陣雪'],86:['❄️','大陣雪'],
+  95:['⛈️','雷陣雨'],96:['⛈️','雷雨夾雹'],99:['⛈️','劇烈雷雨']};
+function wmap(c){return WMAP[c]||['🌡️','—'];}
+
+const EXTRA={
+  1:{region:{name:'淡水・北海岸',lat:25.20,lon:121.69},climo:{hi:33,lo:27},
+     traffic:{level:'mid',summary:'雪山隧道 南下 ‧ 中度車流',segs:[
+       {road:'國道 5 號 ‧ 雪山隧道',dir:'南下（往宜蘭）',risk:'mid',when:'週五傍晚 18:00–19:00',
+        tip:'野柳前往礁溪會經國道3轉國道5走雪隧。週五傍晚往宜蘭車潮漸增、雪隧為主要瓶頸，但傍晚已較午後和緩；出發前先看一下即時路況較保險。',from:'野柳',to:'礁溪'}]}},
+  2:{region:{name:'宜蘭・三星',lat:24.66,lon:121.65},climo:{hi:33,lo:26},
+     traffic:{level:'low',summary:'宜蘭縣內 ‧ 無國道路段',segs:[
+       {road:'宜蘭地方道路（台9線等）',dir:'礁溪 ↔ 三星',risk:'low',when:'全日',local:true,
+        tip:'本日行程皆在宜蘭縣內，以地方道路為主、不走國道，車程順暢。週六熱門景點（三星、安農溪畔）周邊停車位可能較滿，建議提早到。'}]}},
+  3:{region:{name:'宜蘭礁溪 → 新竹',lat:24.83,lon:121.77},climo:{hi:33,lo:27},
+     traffic:{level:'high',summary:'雪隧北上 ‧ 高度壅塞風險',segs:[
+       {road:'國道 5 號 ‧ 雪山隧道',dir:'北上（離開宜蘭）',risk:'high',when:'週日 18:30 出發',
+        tip:'週日下午到傍晚北上雪隧是全台最易塞車的路段。建議務必查看即時路況，可考慮提早或延後出發避開返程尖峰，或評估走台2線濱海替代。',from:'羅東',to:'頭城'},
+       {road:'國道 3 號 / 國道 1 號',dir:'往新竹方向',risk:'mid',when:'19:00 之後',
+        tip:'出雪隧後轉國道3南下往新竹，傍晚車流中等，過了系統交流道大多順暢。',from:'頭城',to:'新竹'},
+       {road:'國道 1 號 / 國道 3 號',dir:'南下（新竹 → 台中）',risk:'low',when:'21:00 之後',
+        tip:'晚間南下返回台中車流量低、行駛順暢，約 1 小時可達。',from:'新竹',to:'台中'}]}}
+};
+
+/* ---------- render ---------- */
+const tabsEl = document.getElementById('tabs');
+const daysEl = document.getElementById('days');
+const cn = ['一','二','三'];
+
+ITIN.forEach((d,i)=>{
+  const tab=document.createElement('button');
+  tab.className='tab'+(i===0?' active':'');
+  tab.dataset.theme=d.theme;
+  tab.dataset.target='day'+d.day;
+  tab.innerHTML=`<span class="d">DAY ${d.day}</span>第${cn[i]}天`;
+  tab.onclick=()=>document.getElementById('day'+d.day).scrollIntoView({behavior:'smooth',block:'start'});
+  tabsEl.appendChild(tab);
+
+  const sec=document.createElement('section');
+  sec.className='day';sec.id='day'+d.day;sec.dataset.theme=d.theme;
+  let rows='';
+  d.stops.forEach(s=>{
+    if(s.travel){
+      rows+=`<div class="row travel"><div class="rail"></div>
+        <div class="travel-pill">${svg('car')}${s.depart?`<b>${s.depart}</b> ‧ `:''}<b>${s.travel}</b> 車程</div></div>`;
+    }else{
+      rows+=`<div class="row stop"><div class="rail"><div class="node">${svg(TYPE_ICON[s.type])}</div></div>
+        <div class="card">
+          <div class="card-head"><span class="time">${s.time}</span><span class="chip">${TYPE_LABEL[s.type]}</span></div>
+          <h3>${s.name}${s.resv?` <span class="resv">（${s.resv}）</span>`:''}</h3>
+          <p class="note">${s.note}</p>
+        </div></div>`;
+    }
+  });
+  sec.innerHTML=`<div class="day-head">
+      <div class="num">${d.day}</div>
+      <div class="info"><div class="label">Day ${d.day}</div><h2>${d.title}</h2><div class="date">${d.date}</div></div>
+    </div>${infoBlock(d.day)}<div class="timeline">${rows}</div>`;
+  daysEl.appendChild(sec);
+});
+
+/* legend */
+const legendEl=document.getElementById('legend');
+[['car','車程時間'],['meal','用餐'],['coffee','下午茶 / 咖啡'],['lodging','住宿'],['sight','景點 / 活動'],['shopping','購物'],['home','返程 / 其他']]
+.forEach(([ic,txt])=>{
+  legendEl.insertAdjacentHTML('beforeend',`<li><span class="li">${svg(ic)}</span>${txt}</li>`);
+});
+
+/* ---------- weather + traffic UI ---------- */
+function infoBlock(day){
+  const e=EXTRA[day], t=e.traffic;
+  return `<div class="info-strip">
+    <div class="ic wcard">
+      <div class="ic-head" onclick="toggleCard(this)">
+        <span class="ic-ico" id="wx-emoji-${day}">⛅</span>
+        <span class="ic-main"><span class="ic-title">${e.region.name}</span><span class="ic-sub" id="wx-sub-${day}">天氣載入中…</span></span>
+        <span class="ic-right"><span class="ic-temp" id="wx-temp-${day}"></span><span class="chev">▾</span></span>
+      </div>
+      <div class="ic-body" id="wx-body-${day}"><div class="ic-inner"><div class="wx-skeleton">天氣資料載入中…</div></div></div>
+    </div>
+    <div class="ic tcard">
+      <div class="ic-head" onclick="toggleCard(this)">
+        <span class="ic-ico road">🛣️</span>
+        <span class="ic-main"><span class="ic-title">國道路況概況</span><span class="ic-sub">${t.summary}</span></span>
+        <span class="ic-right"><span class="risk ${t.level}">${RISK[t.level]}</span><span class="chev">▾</span></span>
+      </div>
+      <div class="ic-body"><div class="ic-inner">${trafficBody(t)}</div></div>
+    </div>
+  </div>`;
+}
+function trafficBody(t){
+  return t.segs.map(s=>`<div class="seg">
+    <div class="seg-top"><span class="risk ${s.risk}">${RISK[s.risk]}</span><b>${s.road}</b></div>
+    <div class="seg-dir">${s.dir} ‧ ${s.when}</div>
+    <p class="seg-tip">${s.tip}</p>
+    ${s.local?'':`<div class="seg-btns">
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s.from)}&destination=${encodeURIComponent(s.to)}&travelmode=driving">Google 即時路況</a>
+      <a class="btn ghost" target="_blank" rel="noopener" href="https://1968.freeway.gov.tw/">高速公路 1968</a>
+    </div>`}
+  </div>`).join('');
+}
+function toggleCard(el){el.closest('.ic').classList.toggle('open');}
+
+function setWxHead(d,emoji,sub,temp){
+  document.getElementById('wx-emoji-'+d).textContent=emoji;
+  document.getElementById('wx-sub-'+d).textContent=sub;
+  document.getElementById('wx-temp-'+d).textContent=temp;
+}
+function setWxBody(d,html){document.getElementById('wx-body-'+d).innerHTML='<div class="ic-inner">'+html+'</div>';}
+const REFRESH_BTN='<button class="wx-refresh" onclick="event.stopPropagation();loadWeather()">↻ 更新</button>';
+
+function adviceList(hi,pop,uv){
+  const a=[];
+  if(pop>=60)a.push('☔ 降雨機率高，務必攜帶雨具');
+  else if(pop>=30)a.push('🌂 午後可能有雨，建議備傘');
+  else a.push('🙂 降雨機率低，適合戶外行程');
+  if(uv>=8)a.push('🧴 紫外線過量，加強防曬');
+  if(hi>=32)a.push('💧 天氣炎熱，記得多補水');
+  return a.map(x=>`<div class="wx-advice">${x}</div>`).join('');
+}
+
+async function loadWeather(){
+  [1,2,3].forEach(d=>document.getElementById('wx-sub-'+d).textContent='天氣載入中…');
+  try{
+    const lat=[1,2,3].map(d=>EXTRA[d].region.lat).join(',');
+    const lon=[1,2,3].map(d=>EXTRA[d].region.lon).join(',');
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`+
+      `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,uv_index_max`+
+      `&timezone=Asia%2FTaipei&forecast_days=16`;
+    const r=await fetch(url); if(!r.ok)throw new Error('http');
+    const data=await r.json(); const arr=Array.isArray(data)?data:[data];
+    [1,2,3].forEach((d,i)=>{
+      const dl=(arr[i]||{}).daily; if(!dl){return;}
+      const tdate=`${TRIP_YEAR}-07-${10+d}`;
+      const idx=dl.time.indexOf(tdate);
+      if(idx>=0) renderForecast(d,dl,idx,tdate);
+      else renderClimo(d,dl);
+    });
+  }catch(e){
+    [1,2,3].forEach(d=>{
+      document.getElementById('wx-sub-'+d).textContent='天氣載入失敗';
+      setWxBody(d,`<div class="wx-skeleton">無法載入天氣資料，請確認網路後重試。</div><div class="wx-foot"><span></span>${REFRESH_BTN.replace('更新','重新載入')}</div>`);
+    });
+  }
+}
+function renderForecast(d,dl,idx,tdate){
+  const code=dl.weather_code[idx], [emoji,label]=wmap(code);
+  const hi=Math.round(dl.temperature_2m_max[idx]), lo=Math.round(dl.temperature_2m_min[idx]);
+  const pop=dl.precipitation_probability_max[idx]??0;
+  const wind=Math.round(dl.wind_speed_10m_max[idx]??0);
+  const uv=Math.round(dl.uv_index_max[idx]??0);
+  setWxHead(d,emoji,label,`${hi}° / ${lo}°`);
+  setWxBody(d,
+    `<div class="wx-grid">
+      <div class="cell"><div class="k">降雨機率</div><div class="v">${pop}%</div></div>
+      <div class="cell"><div class="k">風速</div><div class="v">${wind}</div><div class="k">km/h</div></div>
+      <div class="cell"><div class="k">紫外線</div><div class="v">${uv}</div></div>
+    </div>
+    ${adviceList(hi,pop,uv)}
+    <div class="wx-foot"><span>${tdate.replaceAll('-','/')} 預報 ‧ Open-Meteo</span>${REFRESH_BTN}</div>`);
+}
+function renderClimo(d,dl){
+  const c=EXTRA[d].climo;
+  const [te,tl]=wmap((dl.weather_code||[])[0]);
+  const thi=dl.temperature_2m_max?Math.round(dl.temperature_2m_max[0]):'-';
+  const tlo=dl.temperature_2m_min?Math.round(dl.temperature_2m_min[0]):'-';
+  setWxHead(d,'⛅','七月氣候概況',`${c.hi}° / ${c.lo}°`);
+  setWxBody(d,
+    `<div class="wx-grid">
+      <div class="cell"><div class="k">典型高溫</div><div class="v">${c.hi}°</div></div>
+      <div class="cell"><div class="k">典型低溫</div><div class="v">${c.lo}°</div></div>
+      <div class="cell"><div class="k">午後雷雨</div><div class="v">偏高</div></div>
+    </div>
+    <div class="wx-advice">🌦️ 北部與宜蘭七月濕熱，午後常有雷陣雨，建議備傘、防曬並多補水。</div>
+    <div class="today-line">今日 ${EXTRA[d].region.name.split('→')[0].trim()}：${te} ${tl} ${thi}° / ${tlo}°（即時）</div>
+    <div class="wx-foot"><span>出發日超出 16 天預報，顯示氣候概況</span>${REFRESH_BTN}</div>`);
+}
+loadWeather();
+
+/* reveal cards on scroll */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+
+/* scroll-spy tabs */
+const tabBtns=[...document.querySelectorAll('.tab')];
+const spy=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tabBtns.forEach(t=>t.classList.toggle('active',t.dataset.target===id));
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('.day').forEach(d=>spy.observe(d));
+</script>
+</body>
+</html>
